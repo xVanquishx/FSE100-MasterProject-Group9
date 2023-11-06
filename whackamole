@@ -12,7 +12,7 @@ function setup(speed) {
   var highScore = 0;
   createCanvas(640, 400);
   background(0);
-  createHoles(255);
+  createHoles(200);
   playGame(speed);
   if (lastScore > highScore) {
     highscore = lastScore();
@@ -37,6 +37,7 @@ function playGame(speed) {
 }
 
 function makeMole(num) {
+  var score;
   if (num <= 1) {
     image(mole, 122, 55, 80, 100); //mole 1
   } else if (num <= 2) {
