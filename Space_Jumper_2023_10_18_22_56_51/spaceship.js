@@ -1,36 +1,37 @@
-var w = 640;
-var h = 400;
+function Spaceship() {
+  this.y = height/2;
+  this.x = 64;
 
-var img;
+  this.gravity = 0.7;
+  this.lift = -1.5;
+  this.velocity = 0;
 
-function preload() {
-}
+  var img = loadImage("assets/spaceship.png");;
 
-function setup() {
-  createCanvas(w, h);
-  img = loadImage("assets/spaceship.png")
-}
-
-function draw() {
-  background(255, 255, 128);
-  // A rectangle
-  fill(200, 200, 0);
-  noStroke();
-  rect(20, 20, w - 40, h - 40);
-  // uses global variables for width and height
-  
-  imageMode(CENTER)
-  image(img, width / 2, height / 2)
-}
-
-window.onresize = function () {
-  // assigns new values for width and height variables
-  if (!w * 1.6 > h) {
-    h = window.innerHeight;
-    w = h * 1.6;
-  } else {
-    w = window.innerWidth;
-    h = w / 1.6;
+  this.show = function() {
+    image(img, this.x, this.y);
+    img.resize(width/7, height/12);
   }
-  resizeCanvas(w, h);
-};
+
+  this.up = function() {
+    this.velocity += this.lift;
+  }
+
+  this.update = function() {
+    this.velocity += this.gravity;
+    // this.velocity *= 0.9;
+    this.y += this.velocity;
+
+    if (this.y > height) {
+      this.y = height;
+      this.velocity = 0;
+    }
+
+    if (this.y < 0) {
+      this.y = 0;
+      this.velocity = 0;
+    }
+
+  }
+
+}
