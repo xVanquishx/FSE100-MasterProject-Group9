@@ -42,6 +42,11 @@ function displayButtons() {
       rect(x, y, buttonWidth, buttonHeight, cornerRadius); //Make it rounded corners
       fill(0);
       text(levels[j], x + buttonWidth / 2, y + buttonHeight / 2);
+      fill(255);
+      
+    }
+    if(i < games.length - 1){
+    rect(x + buttonWidth + h/72, h/2.625 - h/6,  h/96, h/2.625 + (buttonHeight + h/48))
     }
   }
 }
@@ -51,7 +56,7 @@ this.mousePressed = function() {
     let x = startX + (buttonWidth + buttonSpacing) * i;
 
     for (let j = 0; j < levels.length; j++) {
-      let y = h/3 + (buttonHeight + h/48) * j;
+      let y = h/2.625 + (buttonHeight + h/48) * j;
 
       if (
         mouseX > x &&
@@ -69,14 +74,14 @@ function launchGame(gameName, level) {
   
   if (gameName === "Whack A Mole") {
     if (level === "Easy") {
-      mgr.showScene(whackAMole(1));
+      mgr.showScene(spring);
     } else if (level === "Medium") {
-      whackAMole(2);
+      mgr.showScene(spring);
     } else if (level === "Hard") {
-      whackAMole(3);
+      mgr.showScene(spring);
     }
   } else if (gameName === "Type Racer") {
-    //Type Racer
+    
   } else if (gameName === "Space Jumper") {
     mgr.showScene(spring);
   }
