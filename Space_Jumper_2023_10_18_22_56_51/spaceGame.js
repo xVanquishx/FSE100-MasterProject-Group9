@@ -3,11 +3,6 @@ var h = 400;
 var shipHeight = h / 2;
 var obstacles = [];
 
-var obstacle1XPos;
-var obstacle2XPos;
-var obstacle3XPos;
-var obstacle4XPos;
-var obstacle5XPos;
 
 var img;
 
