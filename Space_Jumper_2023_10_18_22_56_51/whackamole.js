@@ -1,13 +1,15 @@
+function whackAMole() { 
+
 let mole;
 let score;
 let speed;
 let time;
 
-function preload() {
+this.preload = function() {
   mole = loadImage('moleimage.png');
 }
 
-function setup(speed) {
+this.setup = function(speed) {
   var lastScore = 0;
   var highScore = 0;
   createCanvas(640, 400);
@@ -20,7 +22,7 @@ function setup(speed) {
   gameOver(lastScore, highScore);
 }
 
-function createHoles(holeColor) {
+this.createHoles = function(holeColor) {
   noStroke();
   fill(holeColor);
   ellipse(160, 100, 100, 100);
@@ -31,12 +33,12 @@ function createHoles(holeColor) {
   ellipse(320, 300, 100, 100);
 }
 
-function playGame(speed) {
+this.playGame = function(speed) {
   let currentMole = Math.floor(Math.random() * 6) + 1
   makeMole(currentMole);
 }
 
-function makeMole(num) {
+this.makeMole = function(num) {
   var score;
   if (num <= 1) {
     image(mole, 122, 55, 80, 100); //mole 1
@@ -53,6 +55,7 @@ function makeMole(num) {
   }
 }
 
-function gameOver(lastScore, highScore) {
+this.gameOver = function(lastScore, highScore) {
   
+}
 }

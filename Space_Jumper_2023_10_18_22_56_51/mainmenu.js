@@ -1,3 +1,5 @@
+function mainmenu() {
+
 let buttonWidth = 180;
 let buttonHeight = 40;
 let buttonSpacing = 20;
@@ -6,30 +8,22 @@ let games = ["Whack A Mole", "Type Racer", "Space Jumper"];
 let levels = ["Easy", "Medium", "Hard"];
 let startX; //Starting X position for the first button
 
-let w = 640;
-let h = 480;
 
-let mgr;
 
-function setup() {
-  createCanvas(w, h);
+
+this.setup = function () {
   textFont("monospace");
   startX = (width - (buttonWidth + buttonSpacing) * games.length) / 2 + 8; //Calculate the starting X position
-  mgr = new SceneManager();
-  mgr.wire();
-  mgr.showScene(mainmenu);
 }
 
-function draw() {
-  mgr.draw();
-  /**background(0);
+this.draw = function() {
+  background(0);
   fill(255);
   textAlign(CENTER, CENTER);
   textSize(h/15);
   text("LET'S PLAY A GAME", w / 2, h / 8);
 
   displayButtons();
-  */
 }
 
 function displayButtons() {
@@ -52,7 +46,7 @@ function displayButtons() {
   }
 }
 
-function mousePressed() {
+this.mousePressed = function() {
   for (let i = 0; i < games.length; i++) {
     let x = startX + (buttonWidth + buttonSpacing) * i;
 
@@ -84,7 +78,7 @@ function launchGame(gameName, level) {
   } else if (gameName === "Type Racer") {
     //Type Racer
   } else if (gameName === "Space Jumper") {
-    //Soace Jumper
+    mgr.showScene(spring);
   }
 }
 
@@ -104,3 +98,4 @@ window.onresize = function () {
   startX = (width - (buttonWidth + buttonSpacing) * games.length) / 2 + 8;
   resizeCanvas(w, h);
 };  
+}
