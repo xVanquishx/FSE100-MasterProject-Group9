@@ -18,8 +18,8 @@ function draw() {
 
 function whackamole(startingLevel) {
     gameState = 'start';
-    level = startingLevel - 1; // Adjusting because startGame increments level
-    startGame(level);
+    level = startingLevel; // Set the level directly
+    startGame();
 }
 
 function displayScreen() {
@@ -59,11 +59,12 @@ function drawHomeButton() {
 }
 
 function drawNextLevelButton() {
-  if (level != 3) {
-  fill(0, 0, 0);
-  rect(width / 2 + 80, height / 2 + 20, 120, 40);
-  fill(255);
-  text('Next', width / 2 + 140, height / 2 + 40);
+  // Only draw the button if the level is less than 3
+  if (level < 3) {
+    fill(0, 0, 0);
+    rect(width / 2 + 80, height / 2 + 20, 120, 40);
+    fill(255);
+    text('Next', width / 2 + 140, height / 2 + 40);
   }
 }
 
@@ -95,49 +96,47 @@ function displayGame() {
   text(`Score: ${score}`, 120, 30); // Display score
 }
 
-
-
 function mouseClicked() {
   if (gameState === 'start') {
-    startGame(1);
+    startGame();
   } else if (gameState === 'playing' && moleVisible) {
     checkWhack();
   } else if (gameState === 'end') {
     if (mouseX > width / 2 - 60 && mouseX < width / 2 + 60 && mouseY > height / 2 + 20 && mouseY < height / 2 + 60) {
-      startGame(level); // Replay button
+      startGame(); // Replay button
     } else if (mouseX > width / 2 - 200 && mouseX < width / 2 - 80 && mouseY > height / 2 + 20 && mouseY < height / 2 + 60) {
       // Home button functionality
     } else if (mouseX > width / 2 + 80 && mouseX < width / 2 + 200 && mouseY > height / 2 + 20 && mouseY < height / 2 + 60 && level != 3) {
-      startGame(level + 1); // Next Level button
+      level++; // Increment level
+      startGame(); // Next Level button
     }
   }
 }
 
-function startGame(selectedLevel) {
-  if (level !== selectedLevel) {
-    highScore = 0;  // Reset high score when level changes
+// Set the gridSize to a smaller value
+function startGame() {
+  if (level > 3) {
+    level = 3; // Ensures level does not go above 3
   }
 
-  level = selectedLevel;
-  gridSize = 3 + level;  // Reduced grid size by one
+  gridSize = 3 + level; // Adjusted grid size
 
-  // Setting moleSpeed based on the current level
   switch (level) {
     case 1:
-      moleSpeed = 1; // Speed for level 1
+      moleSpeed = 1;
       break;
     case 2:
-      moleSpeed = 1.25; // Increased speed for level 2
+      moleSpeed = 1.25;
       break;
     case 3:
-      moleSpeed = 1.5; // Further increased speed for level 3
+      moleSpeed = 1.5;
       break;
     default:
-      moleSpeed = 1; // Default speed for any other level
+      moleSpeed = 1;
   }
 
   score = 0;
-  lastWhackedTime = [millis(), millis()]; // Reset for two moles
+  lastWhackedTime = [millis(), millis()];
   currentMoleHole = [floor(random(gridSize * gridSize)), floor(random(gridSize * gridSize))];
   holes = [];
 
@@ -152,16 +151,16 @@ function startGame(selectedLevel) {
 
   gameState = 'playing';
   startTime = millis();
-  moleVisible = [true, true]; // Reset visibility for two moles
-  moleHit = [false, false]; // Reset hit status for two moles
+  moleVisible = [true, true];
+  moleHit = [false, false];
 }
+
 
 function checkWhack() {
   for (let i = 0; i < 2; i++) {
     let moleHole = holes[currentMoleHole[i]];
-    // Check if the mole is visible and not hit yet
     if (moleVisible[i] && !moleHit[i] && dist(mouseX, mouseY, moleHole.x, moleHole.y) < 17.5) {
-      moleHit[i] = true; // Mark as hit
+      moleHit[i] = true;
       score++;
       if (score > highScore) highScore = score;
       moleVisible[i] = false;
@@ -169,3 +168,5 @@ function checkWhack() {
     }
   }
 }
+
+whackamole(1);
