@@ -113,7 +113,7 @@ window.onresize = function () {
 };  
 }
 //Whackamole
-function whackAMoleGame() {
+function whackAMoleGame(difficulty) {
   let level = difficulty + 1; //Difficulty
   let gridSize,
     moleSpeed,
