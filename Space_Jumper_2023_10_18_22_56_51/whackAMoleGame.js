@@ -1,7 +1,7 @@
 function whackAMoleGame() {
     let level = difficulty; //Difficulty
     let gridSize, moleSpeed, holes = [], currentMoleHole, lastWhackedTime, score, highScore = 0;
-    let gameState = 'readyToStart', prevLevel = level, startTime, gameDuration = 30000, moleVisible = [false, false], countdown;
+    let gameState = 'start', prevLevel = level, startTime, gameDuration = 30000, moleVisible = [false, false], countdown;
     let moleHit = [false, false];
     let flashTimer = false;
   
@@ -10,7 +10,6 @@ function whackAMoleGame() {
         textSize(32);
         textFont('monospace');
         textAlign(CENTER, CENTER);
-        startGame();
     }
 
     function draw() {
@@ -45,8 +44,11 @@ function whackAMoleGame() {
     let currentTime = millis();
     let count = 3 - floor((currentTime - countdown) / 1000);
     if (count <= 0) {
-        gameState = 'playing';
-        startTime = millis();
+        if (gameState !== 'playing') {
+            startGame();
+            gameState = 'playing';
+            startTime = millis();
+        }
         return;
     }
     fill(255);
@@ -133,7 +135,7 @@ function whackAMoleGame() {
     function mouseClicked() {
     if (gameState === 'start') {
         gameState = 'countdown';
-        startGame();
+        countdown = millis();
     } else if (gameState === 'playing') {
         checkWhack();
     } else if (gameState === 'end') {
