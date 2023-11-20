@@ -1,7 +1,7 @@
 function spacegame() {
   
   let obstacles = [];
-  let score = 0;
+  let tscore = 0;
   let spaceship;
 
   let img;
@@ -30,8 +30,11 @@ function spacegame() {
       obstacles[i].update();
 
       if (obstacles[i].hits(spaceship)) {
+        score = tscore;
+        tscore = 0;
         mgr.showScene(spacegameover);
-        
+        obstacles.splice(i, 1);
+        obstacles[i].update();
       }
 
       if (obstacles[i].offscreen()) {
@@ -51,8 +54,8 @@ function spacegame() {
       obstacles.push(new Obstacle());
     }
 
-    score++;
-    text(`Score: ${score}`, width - width/12, height/20);
+    tscore++;
+    text(`Score: ${tscore}`, width - width/12, height/20);
   }
 }
 

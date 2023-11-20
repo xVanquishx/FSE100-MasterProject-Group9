@@ -8,14 +8,21 @@ let startX; //Starting X position for the first button
 
 
 var difficulty = 0;
-var spaceShipEasy = 0;
-var spaceShipMedium = 0;
-var spaceShipHard = 0;
+let gameScores = [];
+gameScores[0] = [];
+gameScores[1] = [];
+gameScores[2] = [];
+for(i = 0; i < 3; ++i){
+  for(j = 0; j < 3; ++j){
+    gameScores[i][j] = 0;
+  }
+}
 
 let w = 640;
 let h = 480;
 
 var difficulty;
+var score;
 
 let mgr;
 
