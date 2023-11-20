@@ -114,7 +114,7 @@ window.onresize = function () {
 }
 //Whackamole
 function whackAMoleGame() {
-  let level = difficulty; //Difficulty
+  let level = difficulty + 1; //Difficulty
   let gridSize,
     moleSpeed,
     holes = [],
