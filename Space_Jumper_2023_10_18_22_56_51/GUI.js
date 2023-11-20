@@ -6,8 +6,16 @@ let games = ["Whack A Mole", "Type Racer", "Space Jumper"];
 let levels = ["Easy", "Medium", "Hard"];
 let startX; //Starting X position for the first button
 
+
+var difficulty = 0;
+var spaceShipEasy = 0;
+var spaceShipMedium = 0;
+var spaceShipHard = 0;
+
 let w = 640;
 let h = 480;
+
+var difficulty;
 
 let mgr;
 

@@ -6,7 +6,7 @@ function Spaceship() {
   this.lift = -1.2*(height/480) ;
   this.velocity = 0;
 
-  var img = loadImage("assets/spaceship2.png");;
+  var img = loadImage("./assets/spaceship2.png");;
 
   this.show = function() {
     image(img, this.x, this.y);

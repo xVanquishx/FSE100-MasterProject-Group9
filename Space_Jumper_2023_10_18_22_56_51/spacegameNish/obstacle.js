@@ -1,10 +1,10 @@
 
 function Obstacle() {
-    if(mainmenu.difficulty == 1){
+    if(difficulty == 1){
       this.spacing = height/2;
-    } else if(mainmenu.difficulty == 2){
+    } else if(difficulty == 2){
       this.spacing = height/3;
-    } else if(mainmenu.difficulty == 3){
+    } else if(difficulty == 3){
       this.spacing = height/4;
     }
     

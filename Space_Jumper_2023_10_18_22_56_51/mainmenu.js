@@ -23,6 +23,8 @@ this.draw = function() {
   text("LET'S PLAY A GAME", w / 2, h / 8);
 
   displayButtons();
+
+  
 }
 
 function displayButtons() {

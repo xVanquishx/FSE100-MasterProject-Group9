@@ -17,4 +17,4 @@ function spring() {
     this.keyPressed = function() {
       this.sceneManager.showScene(mainmenu);
     }
-  }
+}

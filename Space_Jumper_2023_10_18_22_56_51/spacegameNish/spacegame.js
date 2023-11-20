@@ -1,9 +1,7 @@
-import { difficulty } from "./storables";
-
 function spacegame() {
+  
   let obstacles = [];
   let score = 0;
-  let highscore = 0;
   let spaceship;
 
   let img;
@@ -12,17 +10,16 @@ function spacegame() {
 
 
   this.setup = function() {
-    img = loadImage("assets/spaceship.png");
-    bg = loadImage('assets/SpaceBackground2.jpg');
+    img = loadImage("./assets/spaceship.png");
+    bg = loadImage('./assets/SpaceBackground2.jpg');
     spaceship = new Spaceship;
-    if(mainmenu.difficulty == 1){
+    if(difficulty == 1){
       obstacleFrequency = 75;
-    } else if (mainmenu.difficulty == 2){
+    } else if (difficulty == 2){
       obstacleFrequency = 60;
-    } else if (mainmenu.difficulty == 3){
+    } else if (difficulty == 3){
       obstacleFrequency = 45;
     }
-    obstacles.push(new Obstacle());
   }
 
   this.draw = function() {
@@ -33,7 +30,8 @@ function spacegame() {
       obstacles[i].update();
 
       if (obstacles[i].hits(spaceship)) {
-        score = 0;
+        mgr.showScene(spacegameover);
+        
       }
 
       if (obstacles[i].offscreen()) {
@@ -49,12 +47,12 @@ function spacegame() {
     spaceship.show();
     
     
-    if (frameCount % 60 == 0) {
+    if (frameCount % obstacleFrequency == 0) {
       obstacles.push(new Obstacle());
     }
 
     score++;
-    text(`Score: ${score}`, width/100, height/200);
+    text(`Score: ${score}`, width - width/12, height/20);
   }
 }
 
