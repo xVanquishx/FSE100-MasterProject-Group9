@@ -1,5 +1,5 @@
-function whackAMoleGame() {
-  let level = difficulty; //Difficulty
+function whackAMoleGame(difficulty) {
+  let level = difficulty + 1; //Difficulty
   let gridSize,
     moleSpeed,
     holes = [],
