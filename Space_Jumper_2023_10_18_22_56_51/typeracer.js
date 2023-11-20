@@ -1,5 +1,6 @@
 function typeracer(){
 
+let homeButton;
 let button;
 let gameStarted = false;
 let currentSlide = "slide1";
@@ -19,7 +20,7 @@ let correctCharacters = 0;
 // Declare medium
 let mediumStoryInput;
 let mediumUserInput = "";
-let mediumStory = "In a forgotten forest, fireflies with wings of rainbow hues emerged at midnight. Their gentle glow was said to\nheal broken hearts. A curious scientist embarked on a quest to capture their magic but found\n friendship instead. The forest's secret remained, but the world gained a little more love.";
+let mediumStory = "In a forgotten forest, fireflies with wings of rainbow hues emerged at midnight. Their gentle glow was said to\nheal broken hearts. A curious scientist embarked on a quest to capture their magic but found\nfriendship instead. The forest's secret remained, but the world gained a little more love.";
 let mediumCorrectInput = mediumStory.split("");
 let mediumTotalTypedCharacters = 0;
 let mediumCorrectCharacters = 0;
@@ -27,12 +28,12 @@ let mediumCorrectCharacters = 0;
 // Declare hard
 let hardStoryInput;
 let hardUserInput = ""; // Declare a variable for the user's input
-let hardStory = "Amidst the labyrinthine meanderings of the archaic university's ivy-cladwalls, Dr. Pemberton, an erudite\n polymath with an insatiable appetite for knowledge, embarked on anaudacious experiment toelucidate the\n enigmatic realms of quantum entanglement, employing a bevy of intricate apparatuses, culminating in a\n symphony of superlative discoveries that resonated through the annals of science.";
+let hardStory = "Amidst the labyrinthine meanderings of the archaic university's ivy-cladwalls, Dr. Pemberton, an erudite\npolymath with an insatiable appetite for knowledge, embarked on anaudacious experiment toelucidate the\nenigmatic realms of quantum entanglement, employing a bevy of intricate apparatuses, culminating in a\nsymphony of superlative discoveries that resonated through the annals of science.";
 let hardCorrectInput = hardStory.split(""); // Convert the story to an array of characters
 let hardTotalTypedCharacters = 0; // Count of all characters typed by the user
 let hardCorrectCharacters = 0; // Count of correctly typed characters
 
-this.setup = function() {
+function setup() {
   createCanvas(640, 400);
   button = createButton('Start Game');
   button.position(120, 120);
@@ -92,16 +93,26 @@ this.setup = function() {
   hardStoryInput.input(hardHandleInput);
   textSize(12);
   hardStoryInput.hide();
+  //home
+  homeButton = createButton('Home');
+homeButton.position(width / 4 - 50, height - 50);
+homeButton.mousePressed(goHome);
 }
 
-this.draw = function() {
+function draw() {
   background(0);
+  if (currentSlide === "slide3" || currentSlide === "slide4" || currentSlide === "slide5") {
+    homeButton.show();
+    } else {
+    homeButton.hide();
+    }
 //Start Game slide
   if (currentSlide === "slide1") {
     fill(255);
     textSize(40);
     text("W", 150, 150);
-  } 
+  }
+ 
   //Choose difficulty slide
   else if (currentSlide === "slide2") {
     // Draw the difficulty selection slide
@@ -398,4 +409,23 @@ function hardHandleInput() {
     }
   }
   }
+function goHome() {
+  // Reset game state
+  gameStarted = false;
+  userInput = "";
+  mediumUserInput = "";
+  hardUserInput = "";
+  totalTypedCharacters = 0;
+  correctCharacters = 0;
+  mediumTotalTypedCharacters = 0;
+  mediumCorrectCharacters = 0;
+  hardTotalTypedCharacters = 0;
+  hardCorrectCharacters = 0;
+
+  // Show the "Start Game" slide
+  currentSlide = "slide1";
+
+  // Show the "Start Game" button again
+  button.show();
+}
 }
