@@ -1,7 +1,7 @@
 function whackAMoleGame() {
-    let level = difficulty; //Difficulty?
+    let level = difficulty; //Difficulty
     let gridSize, moleSpeed, holes = [], currentMoleHole, lastWhackedTime, score, highScore;
-    let gameState = 'start', prevLevel = level, startTime, gameDuration = 30000, moleVisible = [false, false], countdown;
+    let gameState = 'readyToStart', prevLevel = level, startTime, gameDuration = 30000, moleVisible = [false, false], countdown;
     let moleHit = [false, false];
     let flashTimer = false;
   
@@ -10,28 +10,28 @@ function whackAMoleGame() {
         textSize(32);
         textFont('monospace');
         textAlign(CENTER, CENTER);
-        startGame();
     }
 
     function draw() {
-        background(0);
-        switch (gameState) {
-            case 'start':
-                fill(255);
-                text('Whack-A-Mole\nClick to Start', width / 2, height / 2 - 50);
-                displayInstructions();
-                break;
-            case 'countdown':
-                displayCountdown();
-                break;
-            case 'playing':
-                displayGame();
-                break;
-            case 'end':
-                displayEndScreen();
-                break;
-        }
+    background(0);
+    switch (gameState) {
+        case 'readyToStart':
+            // Display the initial "Click to Start" message
+            fill(255);
+            text('Whack-A-Mole\nClick to Start', width / 2, height / 2 - 50);
+            displayInstructions();
+            break;
+        case 'countdown':
+            displayCountdown();
+            break;
+        case 'playing':
+            displayGame();
+            break;
+        case 'end':
+            displayEndScreen();
+            break;
     }
+}
 
     function displayInstructions() {
         textSize(16);
@@ -131,15 +131,17 @@ function whackAMoleGame() {
     }
 
     function mouseClicked() {
-    if (gameState === 'start') {
-        gameState = 'countdown';
-        startGame();
-    } else if (gameState === 'playing') {
-        checkWhack();
-    } else if (gameState === 'end') {
-        handleEndScreenClick();
+        if (gameState === 'readyToStart') {
+            gameState = 'countdown';
+            countdown = millis(); // Initialize countdown timer
+        } else if (gameState === 'start') {
+            // This state might not be needed anymore
+        } else if (gameState === 'playing') {
+            checkWhack();
+        } else if (gameState === 'end') {
+            handleEndScreenClick();
+        }
     }
-}
 
 
     function checkWhack() {
