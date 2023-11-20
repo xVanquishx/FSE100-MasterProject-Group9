@@ -10,7 +10,6 @@ let startX; //Starting X position for the first button
 
 
 
-
 this.setup = function () {
   textFont("monospace");
   startX = (width - (buttonWidth + buttonSpacing) * games.length) / 2 + 8; //Calculate the starting X position
@@ -81,9 +80,16 @@ function launchGame(gameName, level) {
       mgr.showScene(spring);
     }
   } else if (gameName === "Type Racer") {
-    
+    mgr.showScene(typeracer);
   } else if (gameName === "Space Jumper") {
-    mgr.showScene(spring);
+    if (level === "Easy") {
+      difficulty = 1;
+    } else if (level === "Medium") {
+      difficulty= 2;
+    } else if (level === "Hard") {
+      difficulty = 3;
+    }
+    mgr.showScene(spacegame);
   }
 }
 

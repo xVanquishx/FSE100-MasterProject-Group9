@@ -1,3 +1,5 @@
+function typeracer(){
+
 let button;
 let gameStarted = false;
 let currentSlide = "slide1";
@@ -30,7 +32,7 @@ let hardCorrectInput = hardStory.split(""); // Convert the story to an array of 
 let hardTotalTypedCharacters = 0; // Count of all characters typed by the user
 let hardCorrectCharacters = 0; // Count of correctly typed characters
 
-function setup() {
+this.setup = function() {
   createCanvas(640, 400);
   button = createButton('Start Game');
   button.position(120, 120);
@@ -92,7 +94,7 @@ function setup() {
   hardStoryInput.hide();
 }
 
-function draw() {
+this.draw = function() {
   background(0);
 //Start Game slide
   if (currentSlide === "slide1") {
@@ -396,3 +398,4 @@ function hardHandleInput() {
     }
   }
   }
+}

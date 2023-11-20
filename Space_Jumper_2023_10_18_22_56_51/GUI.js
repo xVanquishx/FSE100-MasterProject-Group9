@@ -22,71 +22,10 @@ function setup() {
 
 function draw() {
   mgr.draw();
-  /**background(0);
-  fill(255);
-  textAlign(CENTER, CENTER);
-  textSize(h/15);
-  text("LET'S PLAY A GAME", w / 2, h / 8);
-
-  displayButtons();
-  */
+ 
 }
 
-function displayButtons() {
-  textSize(h/30);
-  for (let i = 0; i < games.length; i++) {
-    let x = startX + (buttonWidth + buttonSpacing) * i;
 
-    //Display the game titles
-    fill(255);
-    text(games[i], x + buttonWidth / 2, h/4);
-
-    //Level buttons
-    for (let j = 0; j < levels.length; j++) {
-      let y = h/2.625 + (buttonHeight + h/48) * j;
-      fill(255);
-      rect(x, y, buttonWidth, buttonHeight, cornerRadius); //Make it rounded corners
-      fill(0);
-      text(levels[j], x + buttonWidth / 2, y + buttonHeight / 2);
-    }
-  }
-}
-
-function mousePressed() {
-  for (let i = 0; i < games.length; i++) {
-    let x = startX + (buttonWidth + buttonSpacing) * i;
-
-    for (let j = 0; j < levels.length; j++) {
-      let y = h/3 + (buttonHeight + h/48) * j;
-
-      if (
-        mouseX > x &&
-        mouseX < x + buttonWidth &&
-        mouseY > y &&
-        mouseY < y + buttonHeight
-      ) {
-        launchGame(games[i], levels[j]);
-      }
-    }
-  }
-}
-
-function launchGame(gameName, level) {
-  
-  if (gameName === "Whack A Mole") {
-    if (level === "Easy") {
-      mgr.showScene(whackAMole(1));
-    } else if (level === "Medium") {
-      whackAMole(2);
-    } else if (level === "Hard") {
-      whackAMole(3);
-    }
-  } else if (gameName === "Type Racer") {
-    //Type Racer
-  } else if (gameName === "Space Jumper") {
-    //Soace Jumper
-  }
-}
 
 window.onresize = function () {
   // assigns new values for width and height variables

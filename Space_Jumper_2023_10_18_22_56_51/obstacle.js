@@ -1,17 +1,24 @@
 
 function Obstacle() {
-    this.spacing = 175;
-    this.top = random(height / 6, 3 / 4 * height);
+    if(mainmenu.difficulty == 1){
+      this.spacing = height/2;
+    } else if(mainmenu.difficulty == 2){
+      this.spacing = height/3;
+    } else if(mainmenu.difficulty == 3){
+      this.spacing = height/4;
+    }
+    
+    this.top = random(-height/10, 5 / 8 * height);
     this.bottom = height - (this.top + this.spacing);
     this.x = width;
-    this.w = 80;
-    this.speed = 6;
+    this.w = width/10;
+    this.speed = width/96;
   
     this.highlight = false;
   
     this.hits = function(spaceship) {
       if (spaceship.y < this.top || spaceship.y > height - this.bottom) {
-        if (spaceship.x > this.x && spaceship.x < this.x + this.w) {
+        if ((spaceship.x + width/80 > this.x && spaceship.x + width/80 < this.x + this.w) || (spaceship.x + width/10 > this.x && spaceship.x + width/10 < this.x + this.w)) {
           this.highlight = true;
           return true;
         }

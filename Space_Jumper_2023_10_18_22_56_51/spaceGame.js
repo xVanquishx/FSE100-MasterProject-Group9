@@ -1,71 +1,62 @@
-var w = 640;
-var h = 400;
-var shipHeight = h / 2;
-var obstacles = [];
+import { difficulty } from "./storables";
+
+function spacegame() {
+  let obstacles = [];
+  let score = 0;
+  let highscore = 0;
+  let spaceship;
+
+  let img;
+  let bg;
+  let obstacleFrequency;
 
 
-var img;
-
-function preload() {
-}
-
-function setup() {
-  createCanvas(w, h);
-  img = loadImage("assets/spaceship.png");
-  spaceship = new Spaceship;
-  obstacles.push(new Obstacle());  
-}
-
-function draw() {
-  background(255, 255, 128);
-  /** A rectangle
-  fill(200, 200, 0);
-  noStroke();
-  rect(20, 20, w - 40, h - 40);
-  */
-  // uses global variables for width and height
-
-  //Ship Flying Logic
-  /**if ((keyIsDown(32) || mouseIsPressed) && shipHeight > 2){
-    shipHeight = shipHeight - 2;
-  } else if (shipHeight < (h - h/10)) {
-    shipHeight = shipHeight + 2;
-  }
-  image(img, (w) / 9, shipHeight);
-
-  //Ship Resize Logic
-  img.resize(w/6, h/10);
-  */
-
-  for (var i = obstacles.length-1; i >= 0; i--) {
-    obstacles[i].show();
-    obstacles[i].update();
-
-    if (obstacles[i].hits(spaceship)) {
-      console.log("HIT");
+  this.setup = function() {
+    img = loadImage("assets/spaceship.png");
+    bg = loadImage('assets/SpaceBackground2.jpg');
+    spaceship = new Spaceship;
+    if(mainmenu.difficulty == 1){
+      obstacleFrequency = 75;
+    } else if (mainmenu.difficulty == 2){
+      obstacleFrequency = 60;
+    } else if (mainmenu.difficulty == 3){
+      obstacleFrequency = 45;
     }
-
-    if (obstacles[i].offscreen()) {
-      obstacles.splice(i, 1);
-    }
-  }
-
-  if(keyIsDown(32)){
-    spaceship.up();
-  }
-  spaceship.update();
-  spaceship.show();
-
-  if (frameCount % 75 == 0) {
     obstacles.push(new Obstacle());
   }
-}
 
-function keyIsDown(UP_ARROW) {
-    spaceship.up();
-    //console.log("SPACE");
-}
+  this.draw = function() {
+    background(bg);
 
+    for (var i = obstacles.length-1; i >= 0; i--) {
+      obstacles[i].show();
+      obstacles[i].update();
+
+      if (obstacles[i].hits(spaceship)) {
+        score = 0;
+      }
+
+      if (obstacles[i].offscreen()) {
+        obstacles.splice(i, 1);
+      }
+    }
+
+    if(keyIsDown(32) || keyIsDown(UP_ARROW) || mouseIsPressed === true){
+     spaceship.up();
+     
+    }
+    spaceship.update();
+    spaceship.show();
+    
+    
+    if (frameCount % 60 == 0) {
+      obstacles.push(new Obstacle());
+    }
+
+    score++;
+    text(`Score: ${score}`, width/100, height/200);
+  }
+}
 
 window.onresize = function () {
   // assigns new values for width and height variables
@@ -78,4 +69,3 @@ window.onresize = function () {
   }
   resizeCanvas(w, h);
 };
-
